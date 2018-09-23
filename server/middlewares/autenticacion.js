@@ -6,9 +6,9 @@ const jwt = require('jsonwebtoken');
 let verificaToken = (req, res, next) => {
     let token = req.get('token');//Nombre del header que se busca puede ser Autorization etc..
 
-    res.json({
-        token: token
-    });
+    // res.json({
+    //     token: token
+    // });
 
     jwt.verify(token, process.env.SEED, (err, decoded) => {
 
