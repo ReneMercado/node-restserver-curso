@@ -1,7 +1,7 @@
 require('./config/config');//Al ser el primero hace tood lo de dentro primero.
 const express = require('express');
 const mongoose = require('mongoose');
-
+const path = require('path');
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -10,6 +10,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+//Habilitar la carpeta public
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 //Congifuración global de rutas
 app.use(require('./routes/index')); //SE CARGA TODAS LAS RUTAS DENTRO DE INDEX.JS
