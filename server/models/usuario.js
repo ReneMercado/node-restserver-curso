@@ -44,7 +44,7 @@ let usuarioSchema = new Schema({
 usuarioSchema.methods.toJSON = function () {
     let user = this;
     let userObject = user.toObject();
-    delete userObject.password;
+    delete userObject.password; //Excluye la contraseña del modelo al pasar 
 
     return userObject;
 }

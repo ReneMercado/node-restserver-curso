@@ -11,7 +11,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use(require('./routes/usuario'));
+//Congifuración global de rutas
+app.use(require('./routes/index')); //SE CARGA TODAS LAS RUTAS DENTRO DE INDEX.JS
+
 
 mongoose.connect(process.env.URLDB, (err, res) => {
     if (err) throw err;
@@ -19,6 +21,7 @@ mongoose.connect(process.env.URLDB, (err, res) => {
     console.log('Base de datos ONLINE');
 });
 
+//ESCUCHA EL PUERTO DEFINIDO EN CONFIG.JS
 app.listen(process.env.PORT, () => {
     console.log("Escuchando puerto", process.env.PORT);
 })
