@@ -49,7 +49,35 @@ let verificaAdmin_Role = (req, res, next) => {
 
 };
 
+// ==============================
+// Verificar Token para imagen
+// ==============================
+
+let verificaTokenImg = (req, res, next) => {
+
+    let token = req.query.token;//Se manda en la url al solicitar ws
+
+    jwt.verify(token, process.env.SEED, (err, decoded) => {
+
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    message: 'Token no válido'
+                }
+            });
+        }
+
+        req.usuario = decoded.usuario; //payload contenia el usuario encriptado
+        next(); //Sigue con la ejecucion del codigo cuando se usa verifica token dentro de las llamadas de WS
+    });
+
+
+
+};
+
 module.exports = {
     verificaToken,
-    verificaAdmin_Role
+    verificaAdmin_Role,
+    verificaTokenImg
 }
